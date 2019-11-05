@@ -1,20 +1,26 @@
 package com.advantal.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.advantal.model.CostumPayload;
+import com.advantal.model.OrgPayload;
 import com.advantal.model.Organization;
 import com.advantal.repository.OrganizationRepository;
 import com.advantal.service.OrganizationService;
 import com.advantal.util.IConstant;
 
+
+@CrossOrigin
 @RestController
 public class OrganizationController {
 
@@ -31,7 +37,6 @@ public class OrganizationController {
 		Organization org = organizationRepository.findByOrganizationName(organization.getOrganizationName());
 		if (org == null) {
 			String uuidKey = UUID.randomUUID().toString();
-
 			Organization orgnew = new Organization();
 			orgnew.setOrganizationName(organization.getOrganizationName());
 			orgnew.setOrganizationKey(uuidKey);
@@ -51,6 +56,9 @@ public class OrganizationController {
 
 	@PostMapping("/create_org")
 	public Map<Object, Object> createOrganization(@RequestBody Organization organization) {
+		
+		
+	
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		Organization o = organizationRepository.findByEmailId(organization.getOrganizationEmail());
 
@@ -113,35 +121,20 @@ public class OrganizationController {
 		return map;
 
 	}
-
-	@PostMapping("/forget_password")
-	public Map<Object, Object> forgetPassword(@RequestBody Organization organization) {
+	
+	@GetMapping(value = "/organization_list")
+	public Map<Object, Object> findByAll() {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		boolean status = organizationService.forwardLink(organization);
-		if (status) {
+		List<OrgPayload> organizationList = organizationService.getorganizationList();
+		if (organizationList.size() > 0 && !organizationList.isEmpty()) {
 			map.put(IConstant.RESPONSE, IConstant.SUCCESS);
-			map.put(IConstant.MESSAGE, IConstant.FORGOT_PASSWORD_SUCCESS_MESSAGE);
+			map.put(IConstant.RESPONSE_LIST, organizationList);
 		} else {
-			map.put(IConstant.RESPONSE, IConstant.INTERNAL_SERVER_ERROR);
-			map.put(IConstant.MESSAGE, IConstant.FORGOT_PASSWORD_ERROR_MESSAGE);
+			map.put(IConstant.RESPONSE, IConstant.NOT_AUTHORIZED);
+			map.put(IConstant.MESSAGE, IConstant.EMPTY_LIST_MESSAGE);
 		}
 
 		return map;
 	}
 
-	@PostMapping("/reset_password")
-	public Map<Object, Object> resetPassword(@RequestBody Organization organization) {
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		boolean status = organizationService.resetPassword(organization);
-		if (status) {
-			map.put(IConstant.RESPONSE, IConstant.SUCCESS);
-			map.put(IConstant.MESSAGE, IConstant.PASSWORD_CHANGE_SUCCESS_MESSAGE);
-		} else {
-			map.put(IConstant.RESPONSE, IConstant.INTERNAL_SERVER_ERROR);
-			map.put(IConstant.MESSAGE, IConstant.PASSWORD_CHANGE_ERROR_MESSAGE);
-		}
-
-		return map;
-
-	}
 }

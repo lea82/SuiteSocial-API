@@ -1,11 +1,15 @@
 package com.adantal.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.advantal.model.CostumPayload;
 import com.advantal.model.Influencer;
+import com.advantal.model.OrgPayload;
 import com.advantal.model.Organization;
 import com.advantal.repository.InfluencerRepository;
 import com.advantal.repository.OrganizationRepository;
@@ -30,11 +34,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 	public boolean createUser(Organization organization) {
 		try {
 
-			String rncPwd = AESCipher.aesEncryptString(organization.getOrganizationpwd(), AESCipher.CUSTOMER_KEY);
-			System.out.println("OrganizationServiceImpl.createUser()" + rncPwd);
-			// String str =AESCipher.aesDecryptString(organization.getOrganizationpwd(),
-			// AESCipher.CUSTOMER_KEY);
-			String str = AESCipher.aesDecryptString(rncPwd, AESCipher.CUSTOMER_KEY);
+			
+			System.out.println(organization.getOrganizationpwd());
+			
+			String str = AESCipher.aesDecryptString(organization.getOrganizationpwd(), AESCipher.CUSTOMER_KEY);
 			System.out.println(str);
 			String sha256hex = DigestUtils.sha256Hex(str);
 			organization.setOrganizationpwd(sha256hex);
@@ -73,7 +76,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 					organizationRepository.save(detail);
 					return true;
 				} else {
-//					Influencer infdetail =influencerRepository.findByEmailId(organization.getOrganizationEmail());
 					Influencer infdetail = influencerRepository.findByEmail(organization.getOrganizationEmail());
 
 					if (infdetail != null && infdetail.getEmailOtp().equals(organization.getEmailOtp())) {
@@ -98,30 +100,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 	}
 
-//	@Override
-//	public Organization resendOtp(Organization organization) {
-//		Organization orgSave = new Organization();
-//		try {
-//			Organization  org=organizationRepository.findByEmailId(organization.getOrganizationEmail());
-//			org.setEmailOtp(RandomStringGenerator.getRandomNumberString(4));
-//			orgSave=	organizationRepository.save(org);
-//			if(orgSave!=null) {
-//				String data = EmailTemplate.getMailBodyTemplate(orgSave.getEmailOtp());
-//					
-//					MailSenderByThread mailSenderByThread = new MailSenderByThread();
-//					mailSenderByThread.toMailId =org.getOrganizationEmail();
-//					mailSenderByThread.msg =	data;
-//					mailSenderByThread.subject="Social Suite OTP " ;
-//					mailSenderByThread.start();	
-//				}
-//					
-//		} catch (Exception e) {
-//			// TODO: handle exceptione
-//			e.printStackTrace();
-//			orgSave=null;
-//		}
-//		return orgSave;
-//	}
 
 	@Override
 	public CostumPayload resendOtp(Organization organization) {
@@ -173,49 +151,19 @@ public class OrganizationServiceImpl implements OrganizationService {
 	}
 
 	@Override
-	public boolean forwardLink(Organization organization) {
-
-		Organization org = organizationRepository.findByEmailId(organization.getOrganizationEmail());
-
-		if (org != null) {
-			String data = EmailTemplate.getTemplate(org.getOrganizationName(), org.getOrganizationEmail());
-
-			MailSenderByThread mailSenderByThread = new MailSenderByThread();
-			mailSenderByThread.toMailId = org.getOrganizationEmail();
-			mailSenderByThread.msg = data;
-			mailSenderByThread.subject = "Email Link ";
-			mailSenderByThread.start();
-			return true;
-
-		} else {
-
+	public List<OrgPayload> getorganizationList() {
+		List<OrgPayload> orgList = new ArrayList<>();
+		List<Organization> organizationList = organizationRepository.findAll();
+		for (Organization organizationList1 : organizationList) {
+			OrgPayload orgPayload=new OrgPayload();
+			orgPayload.setOrganizationName(organizationList1.getOrganizationName());
+			orgPayload.setOrganizationKey(organizationList1.getOrganizationKey());
+			orgPayload.setOrganizationEmail(organizationList1.getOrganizationEmail());
+			orgPayload.setIsVerified(organizationList1.getIsVerified());
+			orgPayload.setEmailOtp(organizationList1.getEmailOtp());
+			orgPayload.setSurveyCompleted(organizationList1.isSurveyCompleted());
+			orgList.add(orgPayload);
 		}
-
-		return false;
-	}
-
-	@Override
-	public boolean resetPassword(Organization organization) {
-		try {
-			if (organization != null) {
-				Organization orgdetail = organizationRepository.findByEmailId(organization.getOrganizationEmail());
-				if (orgdetail != null) {
-					orgdetail.setOrganizationpwd(organization.getOrganizationpwd());
-					organizationRepository.save(orgdetail);
-					return true;
-
-				} else {
-					return false;
-				}
-
-			} else {
-				return false;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
+		return orgList;
 	}
 }

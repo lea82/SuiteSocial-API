@@ -1,17 +1,19 @@
 package com.advantal.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.advantal.model.InflPayload;
 import com.advantal.model.Influencer;
-import com.advantal.model.Organization;
 import com.advantal.repository.InfluencerRepository;
 import com.advantal.service.InfluencerService;
 import com.advantal.util.IConstant;
@@ -148,6 +150,21 @@ public class InfluencerController {
 
 		return map;
 }
+	
+	@GetMapping(value = "/influencer_list")
+	public Map<Object, Object> findByAll() {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		List<InflPayload> influencerList = influencerService.getinfluencerList();
+		if (influencerList.size() >0 && !influencerList.isEmpty()) {
+			map.put(IConstant.RESPONSE, IConstant.SUCCESS);
+			map.put(IConstant.RESPONSE_LIST, influencerList);
+		} else {
+			map.put(IConstant.RESPONSE, IConstant.NOT_AUTHORIZED);
+			map.put(IConstant.MESSAGE, IConstant.EMPTY_LIST_MESSAGE);
+		}
+
+		return map;
+	}
 	@SuppressWarnings("unused")
 	@PostMapping(value = "/verify_social_id")
 	public Map<Object, Object> verifySocialId(@RequestBody Influencer influencer,
@@ -157,13 +174,14 @@ public class InfluencerController {
 		if (Infl!=null && Infl.getSocialLoginId()!=null && Infl.getSocialLoginType()!=null ) {
 			map.put(IConstant.RESPONSE, IConstant.SUCCESS);
 			map.put(IConstant.VERIFY_STATUS, IConstant.ONE);
-
+			
 		} else {
 			map.put(IConstant.RESPONSE, IConstant.NOT_AUTHORIZED);
 			map.put(IConstant.VERIFY_STATUS, IConstant.ZERO);
 		}
 		return map;
 		}
+	
 	
 	
 }

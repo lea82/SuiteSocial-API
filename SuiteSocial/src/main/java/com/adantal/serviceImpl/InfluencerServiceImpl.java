@@ -1,10 +1,15 @@
 package com.adantal.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.advantal.model.InflPayload;
 import com.advantal.model.Influencer;
+import com.advantal.model.OrgPayload;
 import com.advantal.model.Organization;
 import com.advantal.repository.InfluencerRepository;
 import com.advantal.service.InfluencerService;
@@ -70,11 +75,15 @@ public class InfluencerServiceImpl implements InfluencerService{
 	@Override
 	public boolean createUser(Influencer influencer) {
 	try {
-
+System.err.println(influencer.getPassword());
         
-		String rncPwd=	AESCipher.aesEncryptString(influencer.getPassword(),AESCipher.CUSTOMER_KEY );
-		System.out.println("InfluencerServiceImpl.createUser()"+ rncPwd);
-		String str =AESCipher.aesDecryptString(rncPwd, AESCipher.CUSTOMER_KEY);
+			/*
+			 * String rncPwd = AESCipher.aesEncryptString(influencer.getPassword(),
+			 * AESCipher.CUSTOMER_KEY); System.out.println("Influencer.createUser()" +
+			 * rncPwd);
+			 */	// String str =AESCipher.aesDecryptString(organization.getOrganizationpwd(),
+		// AESCipher.CUSTOMER_KEY);
+		String str = AESCipher.aesDecryptString(influencer.getPassword(), AESCipher.CUSTOMER_KEY);
 		System.out.println(str);
 		String sha256hex = DigestUtils.sha256Hex(str);
 		influencer.setPassword(sha256hex);
@@ -195,6 +204,22 @@ public class InfluencerServiceImpl implements InfluencerService{
 			return influencer;
 		}
 		
+	}
+
+	@Override
+	public List<InflPayload> getinfluencerList() {
+		List<InflPayload> inflList = new ArrayList<>();
+		List<Influencer> influencerList = influencerRepository.findAll();
+		for (Influencer influencerList1 : influencerList) {
+			InflPayload inflPayload=new InflPayload();
+			inflPayload.setEmail(influencerList1.getEmail());
+			inflPayload.setEmailOtp(influencerList1.getEmailOtp());
+			inflPayload.setIsVerified(influencerList1.getIsVerified());
+			inflPayload.setSurveyCompleted(influencerList1.isSurveyCompleted());
+			
+			inflList.add(inflPayload);
+		}
+		return inflList;
 	}	
 	
 }

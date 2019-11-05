@@ -7,7 +7,10 @@ public class IConstant {
 	public static final String RESPONSE = "response";
 	public static final String USER_CREATION_RESPONSE = "UserCreationResponse";
 	public static final String MESSAGE = "message";
-	
+	public static final String MESSAGEE = "messagewwww";
+
+	public static final String POSTCAMPAIGN_FILE_PATH ="/home/apache9/webapps/SuiteSocial_Img/";
+	//public static final String POSTCAMPAIGN_FILE_PATH = "F://picSocialSuite//";
 	public static final String SUCCESS = "200";
 	public static final String ORGANIZAION_CREATED_SUCCESS_MESSAGE = "Organization Created successfully";
 	public static final String USER_CREATION_RESPONSE_CODE = "201";
@@ -16,18 +19,18 @@ public class IConstant {
 	public static final String NOT_AUTHORIZED = "401";
 	
 	public static final String STATUS = "status";
-	
+	public static final String EMPTY_LIST_MESSAGE = "list empty";
 	public static final String OBJECT = "object";
 	public static final String LIST = "list empty";
 	public static final String SUCCESS_MESSAGE = "Successfully saved.";
 	public static final String COMPANYSURVEY_ERROR_MESSAGE = "Error in create CompanyServey";
 	public static final String INFLUENCER_SURVEY_ERROR_MESSAGE="Error in create InfluencerServey";
-
 	public static final String INFLUENCER_CREATED_SUCCESS_MESSAGE = "Influencer Created successfully";
 	public static final String INFLUENCER_ERROR_MESSAGE = "Error in create Influencer";
 	public static final String INFLUENCER_SOCIAL_CREATED_SUCCESS_MESSAGE = "Social Influencer Created successfully";
 	public static final String INFLUENCER_SOCIAL_ERROR_MESSAGE="Error in creation Social Influencer";
-	
+	public static final String RESPONSE_LIST = "list";
+	public static final String EMPTY_LIST = "empty";
 	public static final int ONE = 1;
 	public static final String  ORGANIZATION = "organization";
 	public static final String NOT_REGISTERED = "This organization name not registered. Please register organization";
@@ -59,7 +62,7 @@ public class IConstant {
 	public static final String OTP_SEND_ERROR_MESSAGE = "Please enter correct emailId";
 	public static final String USER_TYPE="userType";
 	public static final String USERLOGIN_TYPE="influencer";
-	public static final Object FORGOT_PASSWORD_SUCCESS_MESSAGE = "Forgot Password link sent in register email id";
+	public static final Object FORGOT_PASSWORD_SUCCESS_MESSAGE = "Forgot Password link has been sent to the registered email Id";
 	public static final Object FORGOT_PASSWORD_ERROR_MESSAGE = "Error in  forgot Password";
 	
 	public static final String PASSWORD_CHANGE_SUCCESS_MESSAGE = "Password changed successfully";
@@ -69,6 +72,47 @@ public class IConstant {
 	public static final String ORGANIZATION_ALREADY_MESSAGE="Email Id already exist";
 	public static final String INFLUENCER_ALREADY_MESSAGE="Email Id already exist";
 	public static final String SURVEY_VERIFIED = "isServeyCompleted";
+	public static final String IS_OTP_VERIFIED = "isOtpVerified";
+	public static final String USER_ERROR_MESSAGE = "Otp not verified";
+	public static final String EMAIL_EXIST_ERROR_MESSAGE = "Email Id and Password does not exist";
+	public static final String POSTCAMPAIGN_EXIST_MESSAGE = "Post Campaign Already exist message";
+	public static final String POSTCAMPAIGN_CREATED_SUCCESS_MESSAGE = "Post Campaign Created successfully";
+	public static final String POSTCAMPAIGN_ERROR_MESSAGE = "Error in create Post Campaign";
+	public static final String ERROR_MESSAGEE = "Please try again";
 	
+	public static String sqlQuery = "SELECT *FROM influencer_survey WHERE ";
+
+	public static  String sqlCountQuery = "SELECT COUNT(*) FROM ";
 	
+	public static String sqlQuerycountforDefault = "SELECT COUNT(*) FROM ";
+
+	/**
+	 * cities_your_Followers_located, blog_followers,facebook_followers,
+	 * instagram_followers , twitter_followers, youtube_followers
+	 **/
+
+	public static final String cities_Followers = "cities_your_Followers_located";
+	public static final String interested_in_working_with_brands = "interested_in_working_with_brands";
+	public static final String their_ages = "their_ages";
+	public static final String blog_followers = "blog_followers";
+	public static final String facebook_followers = "facebook_followers";
+	public static final String instagram_followers = "instagram_followers";
+	public static final String twitter_followers = "twitter_followers";
+	public static final String youtube_followers = "youtube_followers";
+
+	public static String sqlQueryForcompanySurvey = "SELECT *FROM company_survey WHERE ";
+	public static String countSQLQueryForCompanySurvey = "SELECT COUNT(*) FROM ";
+
+	public static final String product_category = "product_category";
+	public static final String your_company_name = "your_company_name";
+	public static final String over_all_budget = "over_all_budget";
+
+	public static final String your_followers_age_brackets = "your_followers_age_brackets";
+	public static final String topic_you_post = "topic_you_post";
+	
+	public static final String cmpany_Survey= "company_survey";
+	public static final String influencer_survey= "influencer_survey";
+
+	
+	public static final String your_name = "your_name";
 }

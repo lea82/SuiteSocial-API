@@ -9,95 +9,89 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="company_survey")
-public class CompanySurvey{
-private static final long serialVersionUID = 1L;
-	
+@Table(name = "company_survey")
+public class CompanySurvey {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="company_survey_id")
+	@Column(name = "company_survey_id")
 	private Long companysurveyId;
-	
-	//Your name?
-	@Column(name="your_name")
-	private String yourName;
-	
-	//Your company's name?
-	@Column(name="your_company_name")
-	private String yourcompanyName;
-	
-	//Which product category you are trying to promote?
-	@Column(name="product_category")
-	private String productCategory;
-	
-	//What is your overall budget for this campaign?
-	@Column(name="over_all_budget")
-	private Integer overallBudget;
-	
-	//How many influencers would you like to hire?
-	@Column(name="no_of_influencer")
-	private Integer noOfInfluencer;
 
-	//Could you please describe your brand or product in one sentence?
-	@Column(name="describe_your_brand")
+	// Your name?
+	@Column(name = "your_name")
+	private String yourName;
+
+	// Your company's name?
+	@Column(name = "your_company_name")
+	private String yourcompanyName;
+
+	// Which product category you are trying to promote?
+	@Column(name = "product_category")
+	private String productCategory;
+
+	// What is your overall budget for this campaign?
+	@Column(name = "over_all_budget")
+	private String overallBudget;
+
+	// How many influencers would you like to hire?
+	@Column(name = "no_of_influencer")
+	private String noOfInfluencer;
+
+	// Could you please describe your brand or product in one sentence?
+	@Column(name = "describe_your_brand")
 	private String describeYourBrand;
-	
-	//What ages are you targeting for the campaign?
-	@Column(name="age_for_campaign")
-	private Integer ageForCampaign;
-	
-	//Which social media platforms are you targeting?
-	@Column(name="social_media_platform")
+
+	// What ages are you targeting for the campaign?
+	@Column(name = "age_for_campaign")
+	private String ageForCampaign;
+
+	// Which social media platforms are you targeting?
+	@Column(name = "social_media_platform")
 	private String socialMediaPlatform;
-	
-	//When is your campaign timeline (i.e. November 1 - November 25, 2019)?
-	@Column(name="your_campaign_timeline")
-	private Integer yourCampaignTimeline;
-	
-	//Your email?
-	@Column(name="your_email")
+
+	// When is your campaign timeline (i.e. November 1 - November 25, 2019)?
+	@Column(name = "your_campaign_timeline")
+	private String yourCampaignTimeline;
+
+	// Your email?
+	@Column(name = "your_email")
 	private String yourEmail;
-	
-	//Your phone number?
-	@Column(name="your_Phone_number")
+
+	// Your phone number?
+	@Column(name = "your_Phone_number")
 	private String yourPhoneNumber;
-	
-	//Thank you for your interest. Please leave your preferred method of communication below (phone number or email).
-	//Our brand team will contact you shortly.
-	//Mark only one oval.
-	@Column(name="method_of_communication")
+
+	// Thank you for your interest. Please leave your preferred method of
+	// communication below (phone number or email).
+	// Our brand team will contact you shortly.
+	// Mark only one oval.
+	@Column(name = "method_of_communication")
 	private String methodOfCommunication;
-	
-	//Send me a copy of my responses.
-	@Column(name="copy_of_response")
+
+	// Send me a copy of my responses.
+	@Column(name = "copy_of_response")
 	private String copyOfResponse;
-	
+
 	@ManyToOne
 	private Organization org;
-	
 
 	public Organization getOrg() {
 		return org;
 	}
 
-
-
 	public void setOrg(Organization org) {
 		this.org = org;
 	}
-
-
 
 	public CompanySurvey() {
 		super();
 	}
 
-	
-
 	public CompanySurvey(Long companysurveyId, String yourName, String yourcompanyName, String productCategory,
-			Integer overallBudget, Integer noOfInfluencer, String describeYourBrand, Integer ageForCampaign,
-			String socialMediaPlatform, Integer yourCampaignTimeline, String yourEmail, String yourPhoneNumber,
-			String methodOfCommunication, String copyOfResponse) {
+			String overallBudget, String noOfInfluencer, String describeYourBrand, String ageForCampaign,
+			String socialMediaPlatform, String yourCampaignTimeline, String yourEmail, String yourPhoneNumber,
+			String methodOfCommunication, String copyOfResponse, Organization org) {
 		super();
 		this.companysurveyId = companysurveyId;
 		this.yourName = yourName;
@@ -113,9 +107,8 @@ private static final long serialVersionUID = 1L;
 		this.yourPhoneNumber = yourPhoneNumber;
 		this.methodOfCommunication = methodOfCommunication;
 		this.copyOfResponse = copyOfResponse;
+		this.org = org;
 	}
-
-
 
 	public Long getCompanysurveyId() {
 		return companysurveyId;
@@ -149,23 +142,6 @@ private static final long serialVersionUID = 1L;
 		this.productCategory = productCategory;
 	}
 
-	
-	public Integer getOverallBudget() {
-		return overallBudget;
-	}
-
-	public void setOverallBudget(Integer overallBudget) {
-		this.overallBudget = overallBudget;
-	}
-
-	public Integer getNoOfInfluencer() {
-		return noOfInfluencer;
-	}
-
-	public void setNoOfInfluencer(Integer noOfInfluencer) {
-		this.noOfInfluencer = noOfInfluencer;
-	}
-
 	public String getDescribeYourBrand() {
 		return describeYourBrand;
 	}
@@ -174,28 +150,12 @@ private static final long serialVersionUID = 1L;
 		this.describeYourBrand = describeYourBrand;
 	}
 
-	public Integer getAgeForCampaign() {
-		return ageForCampaign;
-	}
-
-	public void setAgeForCampaign(Integer ageForCampaign) {
-		this.ageForCampaign = ageForCampaign;
-	}
-
 	public String getSocialMediaPlatform() {
 		return socialMediaPlatform;
 	}
 
 	public void setSocialMediaPlatform(String socialMediaPlatform) {
 		this.socialMediaPlatform = socialMediaPlatform;
-	}
-
-	public Integer getYourCampaignTimeline() {
-		return yourCampaignTimeline;
-	}
-
-	public void setYourCampaignTimeline(Integer yourCampaignTimeline) {
-		this.yourCampaignTimeline = yourCampaignTimeline;
 	}
 
 	public String getYourEmail() {
@@ -230,10 +190,51 @@ private static final long serialVersionUID = 1L;
 		this.copyOfResponse = copyOfResponse;
 	}
 
+	public String getOverallBudget() {
+		return overallBudget;
+	}
+
+	public void setOverallBudget(String overallBudget) {
+		this.overallBudget = overallBudget;
+	}
+
+	public String getNoOfInfluencer() {
+		return noOfInfluencer;
+	}
+
+	public void setNoOfInfluencer(String noOfInfluencer) {
+		this.noOfInfluencer = noOfInfluencer;
+	}
+
+	public String getAgeForCampaign() {
+		return ageForCampaign;
+	}
+
+	public void setAgeForCampaign(String ageForCampaign) {
+		this.ageForCampaign = ageForCampaign;
+	}
+
+	public String getYourCampaignTimeline() {
+		return yourCampaignTimeline;
+	}
+
+	public void setYourCampaignTimeline(String yourCampaignTimeline) {
+		this.yourCampaignTimeline = yourCampaignTimeline;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CompanySurvey [companysurveyId=" + companysurveyId + ", yourName=" + yourName + ", yourcompanyName="
+				+ yourcompanyName + ", productCategory=" + productCategory + ", overallBudget=" + overallBudget
+				+ ", noOfInfluencer=" + noOfInfluencer + ", describeYourBrand=" + describeYourBrand
+				+ ", ageForCampaign=" + ageForCampaign + ", socialMediaPlatform=" + socialMediaPlatform
+				+ ", yourCampaignTimeline=" + yourCampaignTimeline + ", yourEmail=" + yourEmail + ", yourPhoneNumber="
+				+ yourPhoneNumber + ", methodOfCommunication=" + methodOfCommunication + ", copyOfResponse="
+				+ copyOfResponse + ", org=" + org + "]";
+	}
 
 }

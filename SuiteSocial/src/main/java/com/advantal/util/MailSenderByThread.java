@@ -5,7 +5,6 @@ import javax.mail.MessagingException;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
 
 public class MailSenderByThread extends Thread{
 	public  String toMailId;

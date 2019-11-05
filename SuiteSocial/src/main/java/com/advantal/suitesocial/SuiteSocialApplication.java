@@ -14,6 +14,6 @@ public class SuiteSocialApplication {
 
 	public static void main(String[] args) {
 	 	SpringApplication.run(SuiteSocialApplication.class, args);
-	 }
-
+	  }
+    
 }  

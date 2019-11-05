@@ -1,61 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Socialsuite</title>
-  <base href="./">
-    <meta charset="utf-8">
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8" />
+  <title>Social Suite</title>
+  <meta name="description" content="Pure Angular admin template built with official material design ui library">
+  <base href="./" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/loginStyle.css" />
+  <style>
+    .app-loader {
+      height: 100vh !important;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+    }
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
- 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    .spinner {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      margin: auto;
+    }
 
-  <link rel="stylesheet" href="assets/css/aos.css">
-  <link rel="stylesheet" href="assets/css/aos_styles.css">
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/font_awesone_5.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/aos.css">
+    .double-bounce1,
+    .double-bounce2 {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-animation: sk-bounce 2s infinite ease-in-out;
+      animation: sk-bounce 2s infinite ease-in-out;
+    }
 
-<link rel="stylesheet" href="styles.ccc6c0baef66bc06b219.css"></head>
-<body>
-  <app-root></app-root>
-<script type="text/javascript" src="runtime.6b75ad0a4a75dd9c1ddd.js"></script><script type="text/javascript" src="polyfills.d05aaea4ab46a902df58.js"></script><script type="text/javascript" src="scripts.d3470c7a27e04c8aa911.js"></script><script type="text/javascript" src="main.ad76131a60634e726252.js"></script></body>
+    .double-bounce2 {
+      -webkit-animation-delay: -1s;
+      animation-delay: -1s;
+    }
 
-<!-- Influencer DashBoard -->
+    @-webkit-keyframes sk-bounce {
 
-<script src="assets/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-<script src="assets/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-<script src="assets/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
-<script src="assets/assets/libs/js/main-js.js"></script>
-<script src="assets/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-<script src="assets/assets/vendor/charts/morris-bundle/morris.js"></script>
-<script src="assets/assets/vendor/charts/morris-bundle/morrisjs.html"></script>
-<script src="assets/assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
-<script src="assets/assets/vendor/charts/charts-bundle/chartjs.js"></script>
-<script src="assets/assets/libs/js/dashboard-influencer.js"></script>
-<!--  -->
+      0%,
+      100% {
+        -webkit-transform: scale(0);
+      }
 
-<script src="https://use.fontawesome.com/da6db5dc37.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.auth0.com/js/auth0/8.12.3/auth0.min.js"></script>
-<script type="text/javascript" language="javascript" src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" language="javascript" src="assets/js/aos.js"></script>
-<script type="text/javascript" language="javascript" src="assets/js/external.js"></script>
+      50% {
+        -webkit-transform: scale(1);
+      }
+    }
+
+    @keyframes sk-bounce {
+
+      0%,
+      100% {
+        transform: scale(0);
+        -webkit-transform: scale(0);
+      }
+
+      50% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+      }
+    }
+  </style>
+<link rel="stylesheet" href="styles.81e2d90fa1774315fb0b.css"></head>
+
+<body class="">
+  <app-root>
+    <div class="app-loader">
+      <div class="spinner">
+        <div class="double-bounce1 mat-bg-primary" style="background: wheat;"></div>
+        <div class="double-bounce2 mat-bg-accent" style="background: #EA3441;"></div>
+      </div>
+    </div>
+  </app-root>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/external.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <!-- <script>
+    __Zone_enable_cross_context_check = true;
+  </script> -->
+<script src="runtime-es2015.691d99159585aa3e9c93.js" type="module"></script><script src="polyfills-es2015.82966e77d3f2d2f3e32e.js" type="module"></script><script src="runtime-es5.19146917f17d0ac6b92c.js" nomodule></script><script src="polyfills-es5.9bd67183ccb8abdc6ab9.js" nomodule></script><script src="main-es2015.5094e5798cecd5f350c3.js" type="module"></script><script src="main-es5.4fd229ffd64e3a0224be.js" nomodule></script></body>
+
 </html>

@@ -14,4 +14,6 @@ public interface InfluencerRepository extends JpaRepository<Influencer, Long> {
 
 	Influencer findByInfluencerId(Long influencerId);
 
+	
+	
 }

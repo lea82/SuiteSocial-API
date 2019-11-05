@@ -1,6 +1,9 @@
 package com.advantal.service;
 
+import java.util.List;
+
 import com.advantal.model.CostumPayload;
+import com.advantal.model.OrgPayload;
 import com.advantal.model.Organization;
 
 public interface OrganizationService {
@@ -12,8 +15,6 @@ public interface OrganizationService {
 
 	public CostumPayload resendOtp(Organization organization);
 
-	public boolean resetPassword(Organization organization);
-
-	public boolean forwardLink(Organization organization);
+	public List<OrgPayload> getorganizationList();
 
 }

@@ -1,5 +1,8 @@
 package com.advantal.service;
 
+import java.util.List;
+
+import com.advantal.model.InflPayload;
 import com.advantal.model.Influencer;
 
 public interface InfluencerService {
@@ -9,8 +12,6 @@ public interface InfluencerService {
 
 	public Influencer verifySocialUser(Influencer influencer);
 
-	//public boolean verifyOtp(Influencer influencer);
-	
-	//public Influencer resendOtp(Influencer influencer);
+	public List<InflPayload> getinfluencerList();
 	
 }

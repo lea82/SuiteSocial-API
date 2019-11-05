@@ -9,184 +9,146 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="influencer_survey")
+@Table(name = "influencer_survey")
 public class InfluencerSurvey {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="influencer_survey_id")
+	@Column(name = "influencer_survey_id")
 	private Long influencersurveyId;
-	
-	//What is your name?
-	@Column(name="your_name")
+
+	// What is your name?
+	@Column(name = "your_name")
 	private String yourName;
-	
-	//What is your email?
-	@Column(name="your_email")
+
+	// What is your email?
+	@Column(name = "your_email")
 	private String yourEmail;
-	
-	//What is your age?
-	@Column(name="your_age")
-	private Integer yourAge;
-	
-	//What is your gender?
-	@Column(name="your_gender")
+
+	// What is your phone number?
+	@Column(name = "your_phone_number")
+	private String yourPhoneNumber;
+
+	// What is your age?
+	@Column(name = "your_birth_year")
+	private String yourBirthYear;
+
+	// What is your gender?
+	@Column(name = "your_gender")
 	private String yourGender;
-	
-	//Which platforms do you use?
-	@Column(name="which_platforms")
-	private String whichPlatforms; 
-	
-	//What topics do you post most about? Choose up to three. Beauty Food Fashion Sports/Fitness Health/Wellness Kids Pets Travel Families 
-	//Cars CPG Leisure Other
-    @Column(name="topic_you_post")
+
+	// Which platforms do you use?
+	@Column(name = "platform_you_use")
+	private String platformYouUse;
+
+	// What topics do you post most about? Choose up to
+	// three. Beauty Food Fashion Sports/Fitness Health/Wellness Kids Pets Travel Families 
+	// Cars CPG Leisure Other
+	@Column(name = "topic_you_post")
 	private String topicYouPost;
-	
-	//Top 3 countries your followers are located in?
-	@Column(name="countries_your_followers_located")
-	private String countriesyourFollowerslocated;
-	
-	//Top 3 cities your followers are located in?
-	@Column(name="cities_your_Followers_located")
-	private String citiesyourFollowerslocated;
-	
-	//Which age brackets are your followers in? Please select 2. Under 20 20-30 30-40 Over 40
-	@Column(name="your_followers_age_brackets")
+
+	// Top 3 countries your followers are located in?
+	@Column(name = "countries_your_followers_located")
+	private String countriesYourFollowersLocated;
+
+	// Top 3 cities your followers are located in?
+	@Column(name = "cities_your_Followers_located")
+	private String citiesYourFollowersLocated;
+
+	// Which age brackets are your followers in? Please select 2. Under
+	// 20 20-30 30-40 Over 40
+	@Column(name = "your_followers_age_brackets")
 	private String yourFollowersAgeBrackets;
-	
-	//What percentage of your followers are Male vs. Female vs. Other.
-	//Male
-	//Female
-	//Other
-	@Column(name="percentage_of_your_followers")
-	private String percentageOfYourFollowers;
-	
-	//How many kids do you have that you would be willing to feature?
-	@Column(name="number_of_kids")
-	private Integer numberOfKids;
-	
-	//What are their ages? Please separate ages by commas. Leave empty if 0 kids.
-	@Column(name="their_ages")
-	private Integer theirAges;
-	
-	//Do you have any pets that you would be willing to feature?
-	//Number of dogs:
-	//Number of cats:
-	//Number of other animals:
-	@Column(name="any_pets_willing_to_feature")
-	private String anyPetsWillingToFeature;
-	
-	//Do you have a significant other that is willing to be featured on your page? Yes No
-	@Column(name="significant_other_willing_to_feature")
+
+	// What percentage of your followers are Male vs. Female vs. Other.
+	@Column(name = "percentage_of_male_followers")
+	private String percentageOfMaleFollowers;
+
+	@Column(name = "percentage_of_female_followers")
+	private String percentageOfFemaleFollowers;
+
+	@Column(name = "percentage_of_other_followers")
+	private String percentageOfOtherFollowers;
+
+	// How many kids do you have that you would be willing to feature?
+	@Column(name = "number_of_kids")
+	private String numberOfKids;
+
+	// What are their ages? Please separate ages by commas. Leave empty if 0 kids.
+	@Column(name = "their_ages")
+	private String theirAges;
+
+	// Do you have any pets that you would be willing to feature?
+	// Number of dogs:
+	// Number of cats:
+	// Number of other animals:
+	@Column(name = "no_of_dogs_willing_to_feature")
+	private String numberOfDogsWillingToFeature;
+
+	@Column(name = "no_of_cats_willing_to_feature")
+	private String numberOfCatsWillingToFeature;
+
+	@Column(name = "no_of_other_animals_willing_to_feature")
+	private String numberOfOtherAnimalsWillingToFeature;
+
+	// Do you have a significant other that is willing to be featured on your
+	// page? Yes No
+	@Column(name = "significant_other_willing_to_feature")
 	private String significantOtherWillingToFeature;
-	
-	//What types of travel would you be interested in? Choose any many as apply. Family 
-	//Romance Adventure Solo Experiential
-	@Column(name="type_of_travel")
+
+	// What types of travel would you be interested in? Choose any many as
+	// apply. Family 
+	// Romance Adventure Solo Experiential
+	@Column(name = "type_of_travel")
 	private String typeOfTravel;
-	
-	//What type of room do you prefer?
-	//Double Queen King
-	@Column(name="type_of_room")
+
+	// What type of room do you prefer?
+	// Double Queen King
+	@Column(name = "type_of_room")
 	private String typeOfRoom;
-	
-	//Which brands would you be interested in working with?
-	@Column(name="interested_in_working_with_brands")
+
+	// What kind of food/drinks do you like? Choose any many as apply.
+	@Column(name = "type_of_food")
+	private String typeOfFood;
+
+	// Which brands would you be interested in working with?
+	@Column(name = "interested_in_working_with_brands")
 	private String interestedInWorkingWithBrands;
-	
-	//Which brands would you never work with?
-	@Column(name="you_never_work_with_brands")
+
+	// Which brands would you never work with?
+	@Column(name = "you_never_work_with_brands")
 	private String youNeverWorkWithBrands;
-	
-	//Please provide a short bio for brands.
-	@Column(name="provide_short_bio_for_brands")
+
+	// Please provide a short bio for brands.
+	@Column(name = "provide_short_bio_for_brands")
 	private String provideShortBioForBrands;
-	
-	//What has been your favorite brand to work with so far and why?
-	@Column(name="your_favorite_brand_to_work_with_so_for")
+
+	// What has been your favorite brand to work with so far and why?
+	@Column(name = "your_favorite_brand_to_work_with_so_for")
 	private String yourFavoriteBrandToWorkWithSoFor;
-    
-	//less than 1k, 1k-2k, 2k-5k, 5k-10k, more than 10k
-	@Column(name="facebook_followers")
+
+	// <2k 2k – 5k 5k – 10k 10k – 20k 20k – 100k > 100k
+	@Column(name = "facebook_followers")
 	private String facebookFollowers;
-	
-	//less than 1k, 1k-2k, 2k-5k, 5k-10k, more than 10k
-	@Column(name="instagram_followers")
+
+	// <2k 2k – 5k 5k – 10k 10k – 20k 20k – 100k > 100k
+	@Column(name = "instagram_followers")
 	private String instagramFollowers;
-	
-	//less than 1k, 1k-2k, 2k-5k, 5k-10k, more than 10k
-	@Column(name="twitter_followers")
+
+	// <2k 2k – 5k 5k – 10k 10k – 20k 20k – 100k > 100k
+	@Column(name = "twitter_followers")
 	private String twitterFollowers;
-	
-	//less than 1k, 1k-2k, 2k-5k, 5k-10k, more than 10k
-	@Column(name="youtube_followers")
+
+	// <2k 2k – 5k 5k – 10k 10k – 20k 20k – 100k > 100k
+	@Column(name = "youtube_followers")
 	private String youtubeFollowers;
-	
-	//less than 1k, 1k-2k, 2k-5k, 5k-10k, more than 10k
-	@Column(name="gmail_followers")
-	private String gmailFollowers;
-	
+
+	// <2k 2k – 5k 5k – 10k 10k – 20k 20k – 100k > 100k
+	@Column(name = "blog_followers")
+	private String blogFollowers;
+
 	@ManyToOne
 	private Influencer infl;
-	
-	public InfluencerSurvey() {
-		super();
-	}
-
-	
-
-
-	public InfluencerSurvey(Long influencersurveyId, String yourName, String yourEmail, Integer yourAge,
-			String yourGender, String whichPlatforms, String topicYouPost, String countriesyourFollowerslocated,
-			String citiesyourFollowerslocated, String yourFollowersAgeBrackets, String percentageOfYourFollowers,
-			Integer numberOfKids, Integer theirAges, String anyPetsWillingToFeature,
-			String significantOtherWillingToFeature, String typeOfTravel, String typeOfRoom,
-			String interestedInWorkingWithBrands, String youNeverWorkWithBrands, String provideShortBioForBrands,
-			String yourFavoriteBrandToWorkWithSoFor, String facebookFollowers, String instagramFollowers,
-			String twitterFollowers, String youtubeFollowers, String gmailFollowers) {
-		super();
-		this.influencersurveyId = influencersurveyId;
-		this.yourName = yourName;
-		this.yourEmail = yourEmail;
-		this.yourAge = yourAge;
-		this.yourGender = yourGender;
-		this.whichPlatforms = whichPlatforms;
-		this.topicYouPost = topicYouPost;
-		this.countriesyourFollowerslocated = countriesyourFollowerslocated;
-		this.citiesyourFollowerslocated = citiesyourFollowerslocated;
-		this.yourFollowersAgeBrackets = yourFollowersAgeBrackets;
-		this.percentageOfYourFollowers = percentageOfYourFollowers;
-		this.numberOfKids = numberOfKids;
-		this.theirAges = theirAges;
-		this.anyPetsWillingToFeature = anyPetsWillingToFeature;
-		this.significantOtherWillingToFeature = significantOtherWillingToFeature;
-		this.typeOfTravel = typeOfTravel;
-		this.typeOfRoom = typeOfRoom;
-		this.interestedInWorkingWithBrands = interestedInWorkingWithBrands;
-		this.youNeverWorkWithBrands = youNeverWorkWithBrands;
-		this.provideShortBioForBrands = provideShortBioForBrands;
-		this.yourFavoriteBrandToWorkWithSoFor = yourFavoriteBrandToWorkWithSoFor;
-		this.facebookFollowers = facebookFollowers;
-		this.instagramFollowers = instagramFollowers;
-		this.twitterFollowers = twitterFollowers;
-		this.youtubeFollowers = youtubeFollowers;
-		this.gmailFollowers = gmailFollowers;
-	}
-
-    
-	public Influencer getInfl() {
-		return infl;
-	}
-
-
-
-
-	public void setInfl(Influencer infl) {
-		this.infl = infl;
-	}
-
-
-
 
 	public Long getInfluencersurveyId() {
 		return influencersurveyId;
@@ -212,12 +174,20 @@ public class InfluencerSurvey {
 		this.yourEmail = yourEmail;
 	}
 
-	public Integer getYourAge() {
-		return yourAge;
+	public String getYourPhoneNumber() {
+		return yourPhoneNumber;
 	}
 
-	public void setYourAge(Integer yourAge) {
-		this.yourAge = yourAge;
+	public void setYourPhoneNumber(String yourPhoneNumber) {
+		this.yourPhoneNumber = yourPhoneNumber;
+	}
+
+	public String getYourBirthYear() {
+		return yourBirthYear;
+	}
+
+	public void setYourBirthYear(String yourBirthYear) {
+		this.yourBirthYear = yourBirthYear;
 	}
 
 	public String getYourGender() {
@@ -228,12 +198,12 @@ public class InfluencerSurvey {
 		this.yourGender = yourGender;
 	}
 
-	public String getWhichPlatforms() {
-		return whichPlatforms;
+	public String getPlatformYouUse() {
+		return platformYouUse;
 	}
 
-	public void setWhichPlatforms(String whichPlatforms) {
-		this.whichPlatforms = whichPlatforms;
+	public void setPlatformYouUse(String platformYouUse) {
+		this.platformYouUse = platformYouUse;
 	}
 
 	public String getTopicYouPost() {
@@ -244,137 +214,92 @@ public class InfluencerSurvey {
 		this.topicYouPost = topicYouPost;
 	}
 
-	public String getCountriesyourFollowerslocated() {
-		return countriesyourFollowerslocated;
+	public String getCountriesYourFollowersLocated() {
+		return countriesYourFollowersLocated;
 	}
 
-	public void setCountriesyourFollowerslocated(String countriesyourFollowerslocated) {
-		this.countriesyourFollowerslocated = countriesyourFollowerslocated;
+	public void setCountriesYourFollowersLocated(String countriesYourFollowersLocated) {
+		this.countriesYourFollowersLocated = countriesYourFollowersLocated;
 	}
 
-	public String getCitiesyourFollowerslocated() {
-		return citiesyourFollowerslocated;
+	public String getCitiesYourFollowersLocated() {
+		return citiesYourFollowersLocated;
 	}
 
-	public void setCitiesyourFollowerslocated(String citiesyourFollowerslocated) {
-		this.citiesyourFollowerslocated = citiesyourFollowerslocated;
+	public void setCitiesYourFollowersLocated(String citiesYourFollowersLocated) {
+		this.citiesYourFollowersLocated = citiesYourFollowersLocated;
 	}
 
-	
 	public String getYourFollowersAgeBrackets() {
 		return yourFollowersAgeBrackets;
 	}
-
-
-
 
 	public void setYourFollowersAgeBrackets(String yourFollowersAgeBrackets) {
 		this.yourFollowersAgeBrackets = yourFollowersAgeBrackets;
 	}
 
-
-
-
-	public String getFacebookFollowers() {
-		return facebookFollowers;
+	public String getPercentageOfMaleFollowers() {
+		return percentageOfMaleFollowers;
 	}
 
-
-
-
-	public void setFacebookFollowers(String facebookFollowers) {
-		this.facebookFollowers = facebookFollowers;
+	public void setPercentageOfMaleFollowers(String percentageOfMaleFollowers) {
+		this.percentageOfMaleFollowers = percentageOfMaleFollowers;
 	}
 
-
-
-
-	public String getInstagramFollowers() {
-		return instagramFollowers;
+	public String getPercentageOfFemaleFollowers() {
+		return percentageOfFemaleFollowers;
 	}
 
-
-
-
-	public void setInstagramFollowers(String instagramFollowers) {
-		this.instagramFollowers = instagramFollowers;
+	public void setPercentageOfFemaleFollowers(String percentageOfFemaleFollowers) {
+		this.percentageOfFemaleFollowers = percentageOfFemaleFollowers;
 	}
 
-
-
-
-	public String getTwitterFollowers() {
-		return twitterFollowers;
+	public String getPercentageOfOtherFollowers() {
+		return percentageOfOtherFollowers;
 	}
 
-
-
-
-	public void setTwitterFollowers(String twitterFollowers) {
-		this.twitterFollowers = twitterFollowers;
+	public void setPercentageOfOtherFollowers(String percentageOfOtherFollowers) {
+		this.percentageOfOtherFollowers = percentageOfOtherFollowers;
 	}
 
-
-
-
-	public String getYoutubeFollowers() {
-		return youtubeFollowers;
-	}
-
-
-
-
-	public void setYoutubeFollowers(String youtubeFollowers) {
-		this.youtubeFollowers = youtubeFollowers;
-	}
-
-
-
-
-	public String getGmailFollowers() {
-		return gmailFollowers;
-	}
-
-
-
-
-	public void setGmailFollowers(String gmailFollowers) {
-		this.gmailFollowers = gmailFollowers;
-	}
-
-
-
-
-	public String getPercentageOfYourFollowers() {
-		return percentageOfYourFollowers;
-	}
-
-	public void setPercentageOfYourFollowers(String percentageOfYourFollowers) {
-		this.percentageOfYourFollowers = percentageOfYourFollowers;
-	}
-
-	public Integer getNumberOfKids() {
+	public String getNumberOfKids() {
 		return numberOfKids;
 	}
 
-	public void setNumberOfKids(Integer numberOfKids) {
+	public void setNumberOfKids(String numberOfKids) {
 		this.numberOfKids = numberOfKids;
 	}
 
-	public Integer getTheirAges() {
+	public String getTheirAges() {
 		return theirAges;
 	}
 
-	public void setTheirAges(Integer theirAges) {
+	public void setTheirAges(String theirAges) {
 		this.theirAges = theirAges;
 	}
 
-	public String getAnyPetsWillingToFeature() {
-		return anyPetsWillingToFeature;
+	public String getNumberOfDogsWillingToFeature() {
+		return numberOfDogsWillingToFeature;
 	}
 
-	public void setAnyPetsWillingToFeature(String anyPetsWillingToFeature) {
-		this.anyPetsWillingToFeature = anyPetsWillingToFeature;
+	public void setNumberOfDogsWillingToFeature(String numberOfDogsWillingToFeature) {
+		this.numberOfDogsWillingToFeature = numberOfDogsWillingToFeature;
+	}
+
+	public String getNumberOfCatsWillingToFeature() {
+		return numberOfCatsWillingToFeature;
+	}
+
+	public void setNumberOfCatsWillingToFeature(String numberOfCatsWillingToFeature) {
+		this.numberOfCatsWillingToFeature = numberOfCatsWillingToFeature;
+	}
+
+	public String getNumberOfOtherAnimalsWillingToFeature() {
+		return numberOfOtherAnimalsWillingToFeature;
+	}
+
+	public void setNumberOfOtherAnimalsWillingToFeature(String numberOfOtherAnimalsWillingToFeature) {
+		this.numberOfOtherAnimalsWillingToFeature = numberOfOtherAnimalsWillingToFeature;
 	}
 
 	public String getSignificantOtherWillingToFeature() {
@@ -399,6 +324,14 @@ public class InfluencerSurvey {
 
 	public void setTypeOfRoom(String typeOfRoom) {
 		this.typeOfRoom = typeOfRoom;
+	}
+
+	public String getTypeOfFood() {
+		return typeOfFood;
+	}
+
+	public void setTypeOfFood(String typeOfFood) {
+		this.typeOfFood = typeOfFood;
 	}
 
 	public String getInterestedInWorkingWithBrands() {
@@ -432,5 +365,75 @@ public class InfluencerSurvey {
 	public void setYourFavoriteBrandToWorkWithSoFor(String yourFavoriteBrandToWorkWithSoFor) {
 		this.yourFavoriteBrandToWorkWithSoFor = yourFavoriteBrandToWorkWithSoFor;
 	}
-	
+
+	public String getFacebookFollowers() {
+		return facebookFollowers;
+	}
+
+	public void setFacebookFollowers(String facebookFollowers) {
+		this.facebookFollowers = facebookFollowers;
+	}
+
+	public String getInstagramFollowers() {
+		return instagramFollowers;
+	}
+
+	public void setInstagramFollowers(String instagramFollowers) {
+		this.instagramFollowers = instagramFollowers;
+	}
+
+	public String getTwitterFollowers() {
+		return twitterFollowers;
+	}
+
+	public void setTwitterFollowers(String twitterFollowers) {
+		this.twitterFollowers = twitterFollowers;
+	}
+
+	public String getYoutubeFollowers() {
+		return youtubeFollowers;
+	}
+
+	public void setYoutubeFollowers(String youtubeFollowers) {
+		this.youtubeFollowers = youtubeFollowers;
+	}
+
+	public String getBlogFollowers() {
+		return blogFollowers;
+	}
+
+	public void setBlogFollowers(String blogFollowers) {
+		this.blogFollowers = blogFollowers;
+	}
+
+	public Influencer getInfl() {
+		return infl;
+	}
+
+	public void setInfl(Influencer infl) {
+		this.infl = infl;
+	}
+
+	@Override
+	public String toString() {
+		return "InfluencerSurvey [influencersurveyId=" + influencersurveyId + ", yourName=" + yourName + ", yourEmail="
+				+ yourEmail + ", yourPhoneNumber=" + yourPhoneNumber + ", yourBirthYear=" + yourBirthYear
+				+ ", yourGender=" + yourGender + ", platformYouUse=" + platformYouUse + ", topicYouPost=" + topicYouPost
+				+ ", countriesYourFollowersLocated=" + countriesYourFollowersLocated + ", citiesYourFollowersLocated="
+				+ citiesYourFollowersLocated + ", yourFollowersAgeBrackets=" + yourFollowersAgeBrackets
+				+ ", percentageOfMaleFollowers=" + percentageOfMaleFollowers + ", percentageOfFemaleFollowers="
+				+ percentageOfFemaleFollowers + ", percentageOfOtherFollowers=" + percentageOfOtherFollowers
+				+ ", numberOfKids=" + numberOfKids + ", theirAges=" + theirAges + ", numberOfDogsWillingToFeature="
+				+ numberOfDogsWillingToFeature + ", numberOfCatsWillingToFeature=" + numberOfCatsWillingToFeature
+				+ ", numberOfOtherAnimalsWillingToFeature=" + numberOfOtherAnimalsWillingToFeature
+				+ ", significantOtherWillingToFeature=" + significantOtherWillingToFeature + ", typeOfTravel="
+				+ typeOfTravel + ", typeOfRoom=" + typeOfRoom + ", typeOfFood=" + typeOfFood
+				+ ", interestedInWorkingWithBrands=" + interestedInWorkingWithBrands + ", youNeverWorkWithBrands="
+				+ youNeverWorkWithBrands + ", provideShortBioForBrands=" + provideShortBioForBrands
+				+ ", yourFavoriteBrandToWorkWithSoFor=" + yourFavoriteBrandToWorkWithSoFor + ", facebookFollowers="
+				+ facebookFollowers + ", instagramFollowers=" + instagramFollowers + ", twitterFollowers="
+				+ twitterFollowers + ", youtubeFollowers=" + youtubeFollowers + ", blogFollowers=" + blogFollowers
+				+ ", infl=" + infl + "]";
+	}
+
 }
