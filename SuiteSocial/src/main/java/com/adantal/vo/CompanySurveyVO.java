@@ -67,6 +67,12 @@ public class CompanySurveyVO {
 	// Send me a copy of my responses.
 	@XmlElement(name = "copy_of_response")
 	private String copyOfResponse;
+	
+	@XmlElement(name = "average_rating")
+	private Double averageRating;
+	
+	@XmlElement(name = "total_rating")
+	private Integer totalRating;
 
 	@ManyToOne
 	private Organization org;
@@ -190,6 +196,24 @@ public class CompanySurveyVO {
 	public void setOrg(Organization org) {
 		this.org = org;
 	}
+	
+	
+
+	public Double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(Double averageRating) {
+		this.averageRating = averageRating;
+	}
+
+	public Integer getTotalRating() {
+		return totalRating;
+	}
+
+	public void setTotalRating(Integer totalRating) {
+		this.totalRating = totalRating;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -197,22 +221,17 @@ public class CompanySurveyVO {
 
 	@Override
 	public String toString() {
+		final int maxLen = 10;
 		return "CompanySurveyVO [companysurveyId=" + companysurveyId + ", yourName=" + yourName + ", yourcompanyName="
-				+ yourcompanyName + ", productCategory=" + productCategory + ", overallBudget=" + overallBudget
-				+ ", noOfInfluencer=" + noOfInfluencer + ", describeYourBrand=" + describeYourBrand
-				+ ", ageForCampaign=" + ageForCampaign + ", socialMediaPlatform=" + socialMediaPlatform
-				+ ", yourCampaignTimeline=" + yourCampaignTimeline + ", yourEmail=" + yourEmail + ", yourPhoneNumber="
-				+ yourPhoneNumber + ", methodOfCommunication=" + methodOfCommunication + ", copyOfResponse="
-				+ copyOfResponse + ", org=" + org + ", getCompanysurveyId()=" + getCompanysurveyId()
-				+ ", getYourName()=" + getYourName() + ", getYourcompanyName()=" + getYourcompanyName()
-				+ ", getProductCategory()=" + getProductCategory() + ", getOverallBudget()=" + getOverallBudget()
-				+ ", getNoOfInfluencer()=" + getNoOfInfluencer() + ", getDescribeYourBrand()=" + getDescribeYourBrand()
-				+ ", getAgeForCampaign()=" + getAgeForCampaign() + ", getSocialMediaPlatform()="
-				+ getSocialMediaPlatform() + ", getYourCampaignTimeline()=" + getYourCampaignTimeline()
-				+ ", getYourEmail()=" + getYourEmail() + ", getYourPhoneNumber()=" + getYourPhoneNumber()
-				+ ", getMethodOfCommunication()=" + getMethodOfCommunication() + ", getCopyOfResponse()="
-				+ getCopyOfResponse() + ", getOrg()=" + getOrg() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ yourcompanyName + ", productCategory="
+				+ (productCategory != null ? productCategory.subList(0, Math.min(productCategory.size(), maxLen))
+						: null)
+				+ ", overallBudget=" + overallBudget + ", noOfInfluencer=" + noOfInfluencer + ", describeYourBrand="
+				+ describeYourBrand + ", ageForCampaign=" + ageForCampaign + ", socialMediaPlatform="
+				+ socialMediaPlatform + ", yourCampaignTimeline=" + yourCampaignTimeline + ", yourEmail=" + yourEmail
+				+ ", yourPhoneNumber=" + yourPhoneNumber + ", methodOfCommunication=" + methodOfCommunication
+				+ ", copyOfResponse=" + copyOfResponse + ", averageRating=" + averageRating + ", totalRating="
+				+ totalRating + ", org=" + org + "]";
 	}
 
 	

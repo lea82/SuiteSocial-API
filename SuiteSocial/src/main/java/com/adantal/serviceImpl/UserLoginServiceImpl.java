@@ -61,13 +61,7 @@ public class UserLoginServiceImpl implements UserLoginService {
 			}
 		} catch (Exception e) {
 
-			/*
-			 * System.out.println(DigestUtils.sha256Hex(AESCipher.aesDecryptString(userLogin
-			 * .getPassword(),AESCipher.CUSTOMER_KEY))); String descpassword =
-			 * AESCipher.aesDecryptString(userLogin.getPassword(), AESCipher.CUSTOMER_KEY);
-			 * String password = DigestUtils.sha256Hex(descpassword);
-			 */
-			e.printStackTrace();
+			//e.printStackTrace();
 			return status = false;
 		}
 		return status = false;
@@ -111,7 +105,7 @@ public class UserLoginServiceImpl implements UserLoginService {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return status = false;
 		}
 		return status = false;
@@ -185,7 +179,7 @@ public class UserLoginServiceImpl implements UserLoginService {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return status = false;
 		}
 		return status = false;

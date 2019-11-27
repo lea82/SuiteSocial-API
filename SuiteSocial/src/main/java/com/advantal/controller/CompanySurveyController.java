@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.adantal.vo.CompanySurveyVO;
 import com.advantal.model.CompanySurvey;
+import com.advantal.model.InfluencerSurvey;
 import com.advantal.service.CompanySurveyService;
 import com.advantal.util.IConstant;
 
@@ -23,10 +24,6 @@ public class CompanySurveyController {
 	
 	@Autowired
 	private CompanySurveyService comSurveyService;
-	
-	
-
-
 	
 	@GetMapping("/getallCompanySurvey")
 	public List<CompanySurvey> getRecentlyMessages() {
@@ -54,9 +51,21 @@ public class CompanySurveyController {
 	@PostMapping("/cmny_search_by_criteria")
 	public Map<Object, Object> searchByCmnyCriteria(@RequestBody CompanySurveyVO CompanySurveyVO) {
 		
-		System.out.println("controller exist... ");
 		return companySurveyService.searchByCmnyCriteria(CompanySurveyVO);
 
 	}
+	
+	@PostMapping(value = "/get_company_survey_by_email")
+	public Map<Object, Object> findCompanySurveyByEmail(@RequestBody Map<String, String> reqParams) {		
+		
+		return companySurveyService.getCompanySurveyRecordbyMail(reqParams.get("yourEmail"));	
+	}
+	
+	@PostMapping(value = "/edit_company_survey")
+	public Map<Object, Object> editCompanySurveyByEmail(@RequestBody CompanySurvey companySurvey) {		
+		
+		return companySurveyService.editCompanySurveyRecord(companySurvey);	
+	}
+
 
 }

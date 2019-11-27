@@ -146,6 +146,27 @@ public class InfluencerSurvey {
 	// <2k 2k – 5k 5k – 10k 10k – 20k 20k – 100k > 100k
 	@Column(name = "blog_followers")
 	private String blogFollowers;
+	
+	@Column(name = "facebook_price_range")
+	private String facebookPriceRange;
+
+	@Column(name = "instagram_price_range")
+	private String instagramPriceRange;
+
+	@Column(name = "twitter_price_range")
+	private String twitterPriceRange;
+
+	@Column(name = "youtube_price_range")
+	private String youtubePriceRange;
+
+	@Column(name = "blog_price_range")
+	private String blogPriceRange;
+	
+	@Column(name = "average_rating")
+	private Double averageRating;
+	
+	@Column(name = "total_rating")
+	private Integer totalRating;
 
 	@ManyToOne
 	private Influencer infl;
@@ -413,6 +434,63 @@ public class InfluencerSurvey {
 	public void setInfl(Influencer infl) {
 		this.infl = infl;
 	}
+	
+	public Double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(Double averageRating) {
+		this.averageRating = averageRating;
+	}
+
+	public Integer getTotalRating() {
+		return totalRating;
+	}
+
+	public void setTotalRating(Integer totalRating) {
+		this.totalRating = totalRating;
+	}
+
+	
+	public String getFacebookPriceRange() {
+		return facebookPriceRange;
+	}
+
+	public void setFacebookPriceRange(String facebookPriceRange) {
+		this.facebookPriceRange = facebookPriceRange;
+	}
+
+	public String getInstagramPriceRange() {
+		return instagramPriceRange;
+	}
+
+	public void setInstagramPriceRange(String instagramPriceRange) {
+		this.instagramPriceRange = instagramPriceRange;
+	}
+
+	public String getTwitterPriceRange() {
+		return twitterPriceRange;
+	}
+
+	public void setTwitterPriceRange(String twitterPriceRange) {
+		this.twitterPriceRange = twitterPriceRange;
+	}
+
+	public String getYoutubePriceRange() {
+		return youtubePriceRange;
+	}
+
+	public void setYoutubePriceRange(String youtubePriceRange) {
+		this.youtubePriceRange = youtubePriceRange;
+	}
+
+	public String getBlogPriceRange() {
+		return blogPriceRange;
+	}
+
+	public void setBlogPriceRange(String blogPriceRange) {
+		this.blogPriceRange = blogPriceRange;
+	}
 
 	@Override
 	public String toString() {
@@ -433,7 +511,10 @@ public class InfluencerSurvey {
 				+ ", yourFavoriteBrandToWorkWithSoFor=" + yourFavoriteBrandToWorkWithSoFor + ", facebookFollowers="
 				+ facebookFollowers + ", instagramFollowers=" + instagramFollowers + ", twitterFollowers="
 				+ twitterFollowers + ", youtubeFollowers=" + youtubeFollowers + ", blogFollowers=" + blogFollowers
-				+ ", infl=" + infl + "]";
+				+ ", facebookPriceRange=" + facebookPriceRange + ", instagramPriceRange=" + instagramPriceRange
+				+ ", twitterPriceRange=" + twitterPriceRange + ", youtubePriceRange=" + youtubePriceRange
+				+ ", blogPriceRange=" + blogPriceRange + ", averageRating=" + averageRating + ", totalRating="
+				+ totalRating + ", infl=" + infl + "]";
 	}
 
 }
