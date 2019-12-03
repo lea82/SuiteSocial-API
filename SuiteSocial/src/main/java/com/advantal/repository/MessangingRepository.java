@@ -30,4 +30,11 @@ public interface MessangingRepository extends JpaRepository<Messaging, Integer> 
 	@Query(value = " SELECT * From messaging_config where message_identifiers = :messageIdentifiers", nativeQuery = true)
 	List<Messaging> findUserByMessageIdentifiers(String messageIdentifiers);
 
+//	@Query(value = " SELECT COUNT(*) FROM Messaging  WHERE senderType = :senderType AND messageIdentifier = :messageIdentifiers  AND readabaleMessages = :redableMessage ")
+	@Query(value = " SELECT COUNT(*) From messaging_config where message_identifiers = :messageIdentifiers AND sender_type = :senderType readable_messages = :redableMessage", nativeQuery = true)
+	long unreadableUserMessageCount(String senderType, String messageIdentifiers, int redableMessage);
+
+	@Query(value = " SELECT * From messaging_config where message_identifiers = :messageIdentifiers AND sender_type = :senderType", nativeQuery = true)
+	List<Messaging> findUserByMessageIdentifiersAndSenderType(String messageIdentifiers, String senderType);
+
 }

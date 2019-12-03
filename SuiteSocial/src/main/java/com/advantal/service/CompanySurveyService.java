@@ -14,4 +14,8 @@ public interface CompanySurveyService {
 	Map<Object, Object> searchByCmnyCriteria(CompanySurveyVO companySurveyVO);
 
 	List<CompanySurvey> findAllCompanySurvey();
+
+	Map<Object, Object> getCompanySurveyRecordbyMail(String byEmail);
+
+	Map<Object, Object> editCompanySurveyRecord(CompanySurvey companySurvey);
 }

@@ -11,8 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "company_survey")
 public class CompanySurvey {
-	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "company_survey_id")
@@ -72,6 +71,12 @@ public class CompanySurvey {
 	// Send me a copy of my responses.
 	@Column(name = "copy_of_response")
 	private String copyOfResponse;
+	
+	@Column(name = "average_rating")
+	private Double averageRating;
+	
+	@Column(name = "total_rating")
+	private Integer totalRating;
 
 	@ManyToOne
 	private Organization org;
@@ -83,33 +88,7 @@ public class CompanySurvey {
 	public void setOrg(Organization org) {
 		this.org = org;
 	}
-
-	public CompanySurvey() {
-		super();
-	}
-
-	public CompanySurvey(Long companysurveyId, String yourName, String yourcompanyName, String productCategory,
-			String overallBudget, String noOfInfluencer, String describeYourBrand, String ageForCampaign,
-			String socialMediaPlatform, String yourCampaignTimeline, String yourEmail, String yourPhoneNumber,
-			String methodOfCommunication, String copyOfResponse, Organization org) {
-		super();
-		this.companysurveyId = companysurveyId;
-		this.yourName = yourName;
-		this.yourcompanyName = yourcompanyName;
-		this.productCategory = productCategory;
-		this.overallBudget = overallBudget;
-		this.noOfInfluencer = noOfInfluencer;
-		this.describeYourBrand = describeYourBrand;
-		this.ageForCampaign = ageForCampaign;
-		this.socialMediaPlatform = socialMediaPlatform;
-		this.yourCampaignTimeline = yourCampaignTimeline;
-		this.yourEmail = yourEmail;
-		this.yourPhoneNumber = yourPhoneNumber;
-		this.methodOfCommunication = methodOfCommunication;
-		this.copyOfResponse = copyOfResponse;
-		this.org = org;
-	}
-
+	
 	public Long getCompanysurveyId() {
 		return companysurveyId;
 	}
@@ -222,8 +201,22 @@ public class CompanySurvey {
 		this.yourCampaignTimeline = yourCampaignTimeline;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	
+	
+	public Double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(Double averageRating) {
+		this.averageRating = averageRating;
+	}
+
+	public Integer getTotalRating() {
+		return totalRating;
+	}
+
+	public void setTotalRating(Integer totalRating) {
+		this.totalRating = totalRating;
 	}
 
 	@Override
@@ -234,7 +227,8 @@ public class CompanySurvey {
 				+ ", ageForCampaign=" + ageForCampaign + ", socialMediaPlatform=" + socialMediaPlatform
 				+ ", yourCampaignTimeline=" + yourCampaignTimeline + ", yourEmail=" + yourEmail + ", yourPhoneNumber="
 				+ yourPhoneNumber + ", methodOfCommunication=" + methodOfCommunication + ", copyOfResponse="
-				+ copyOfResponse + ", org=" + org + "]";
+				+ copyOfResponse + ", averageRating=" + averageRating + ", totalRating=" + totalRating + ", org=" + org
+				+ "]";
 	}
 
 }

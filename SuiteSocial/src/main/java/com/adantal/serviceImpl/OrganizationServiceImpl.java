@@ -94,7 +94,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		}
 
@@ -141,11 +141,11 @@ public class OrganizationServiceImpl implements OrganizationService {
 				}
 
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return cosPayload;
 	}

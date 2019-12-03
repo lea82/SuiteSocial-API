@@ -11,5 +11,8 @@ public interface InfluencerSurveyService {
 
 	Map<Object, Object> searchByInfluencerSurveyCriteria(InfluencerSurveyVO influencerSurveyVO);
 
+	public Map<Object, Object> getInfluencerSurveyRecordbyMail(String byEmail);
+
+	Map<Object, Object> editInfluencerSurveyRecord(InfluencerSurvey influencerSurvey);
 	
 }

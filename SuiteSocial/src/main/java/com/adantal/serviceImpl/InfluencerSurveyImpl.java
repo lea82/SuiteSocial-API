@@ -37,12 +37,14 @@ public class InfluencerSurveyImpl implements InfluencerSurveyService {
 	@Override
 	public InfluencerSurvey saveSurveyDetail(InfluencerSurvey influencerSurvey) {
 
+		influencerSurvey.setAverageRating(0.0);
+		influencerSurvey.setTotalRating(0);
 		InfluencerSurvey infsave = influencerSurveyRepository.save(influencerSurvey);
 
 		if (infsave != null) {
-			Influencer org = influencerRepository.findByInfluencerId(infsave.getInfl().getInfluencerId());
-			org.setSurveyCompleted(true);
-			influencerRepository.save(org);
+			Influencer infl = influencerRepository.findByInfluencerId(infsave.getInfl().getInfluencerId());
+			infl.setSurveyCompleted(true);
+			influencerRepository.save(infl);
 		}
 		return infsave;
 	}
@@ -56,8 +58,6 @@ public class InfluencerSurveyImpl implements InfluencerSurveyService {
 
 		List<InfluencerSurvey> listOfInfluencerSurvey = new ArrayList<InfluencerSurvey>();
 
-		System.out.println("influencerSurveyVO.getSearchByCityOrName()= " + influencerSurveyVO.getSearchByCityOrName());
-
 		List<Map<String, Object>> templateResult = new ArrayList<Map<String, Object>>();
 
 		try {
@@ -70,6 +70,7 @@ public class InfluencerSurveyImpl implements InfluencerSurveyService {
 					&& influencerSurveyVO.getYourFollowersAgeBrackets().isEmpty()
 					&& influencerSurveyVO.getTopicYouPost().isEmpty()
 					&& influencerSurveyVO.getSearchByCityOrName() == null
+					&& influencerSurveyVO.getAverageRating() == null
 
 			) {
 
@@ -93,7 +94,8 @@ public class InfluencerSurveyImpl implements InfluencerSurveyService {
 					&& influencerSurveyVO.getInstagramFollowers() == null
 					&& influencerSurveyVO.getYourFollowersAgeBrackets().isEmpty()
 					&& influencerSurveyVO.getTopicYouPost().isEmpty()
-					&& influencerSurveyVO.getSearchByCityOrName() != null) {
+					&& influencerSurveyVO.getSearchByCityOrName() != null
+					&& influencerSurveyVO.getAverageRating() == null) {
 				System.out.println("for Single key search  .... ");
 
 				if (influencerSurveyVO.getSearchByCityOrName() != null) {
@@ -124,9 +126,25 @@ public class InfluencerSurveyImpl implements InfluencerSurveyService {
 					|| influencerSurveyVO.getYoutubeFollowers() != null || influencerSurveyVO.getBlogFollowers() != null
 					|| influencerSurveyVO.getFacebookFollowers() != null
 					|| influencerSurveyVO.getInstagramFollowers() != null
-					|| influencerSurveyVO.getYourFollowersAgeBrackets() != null) {
+					|| influencerSurveyVO.getYourFollowersAgeBrackets() != null
+					|| influencerSurveyVO.getAverageRating() != null) {
 
 				System.out.println("for dynamic custom search with city or name .... ");
+
+				/** update source for Average Ratings. **/
+				if (influencerSurveyVO.getAverageRating() != null) {
+				    int startPoint =Integer.parseInt(Double.toString(influencerSurveyVO.getAverageRating()).substring(0, 1));
+					int endPoint = startPoint - 1;
+					if (startPoint==1) {
+						sqlQuery = sqlQuery + IConstant.AVERAGE_RATINGS + " BETWEEN " + endPoint + " AND " + startPoint
+								+ " AND ";
+					}else {
+						Double endvalue=endPoint+0.1;
+						sqlQuery = sqlQuery + IConstant.AVERAGE_RATINGS + " BETWEEN " + endvalue + " AND " + startPoint
+								+ " AND ";
+					}
+					
+				}
 
 				/** For your_followers_age_brackets **/
 
@@ -229,34 +247,7 @@ public class InfluencerSurveyImpl implements InfluencerSurveyService {
 
 				}
 
-				/*
-				 * if (!influencerSurveyVO.getYourFollowersAgeBrackets().isEmpty()) {
-				 * 
-				 * String citiesValues = ""; int size = 1;
-				 * 
-				 * for (String s1 : influencerSurveyVO.getYourFollowersAgeBrackets()) {
-				 * 
-				 * if (size < influencerSurveyVO.getYourFollowersAgeBrackets().size()) {
-				 * citiesValues = citiesValues + " '" + s1 + "' " + ","; size++; } else
-				 * citiesValues = citiesValues + " '" + s1 + "' "; } sqlQuery = sqlQuery +
-				 * IConstant.your_followers_age_brackets + " IN( " + citiesValues + ") AND ";
-				 * 
-				 * }
-				 * 
-				 * if (!influencerSurveyVO.getTopicYouPost().isEmpty()) {
-				 * 
-				 * String citiesValues = ""; int size = 1;
-				 * 
-				 * for (String s1 : influencerSurveyVO.getTopicYouPost()) {
-				 * 
-				 * if (size < influencerSurveyVO.getTopicYouPost().size()) { citiesValues =
-				 * citiesValues + " '" + s1 + "' " + ","; size++; } else citiesValues =
-				 * citiesValues + " '" + s1 + "' "; } sqlQuery = sqlQuery +
-				 * IConstant.topic_you_post + " IN( " + citiesValues + ") AND ";
-				 * 
-				 * }
-				 * 
-				 */
+				
 				if (influencerSurveyVO.getTwitterFollowers() != null) {
 
 					sqlQuery = sqlQuery + IConstant.twitter_followers + " = '"
@@ -360,6 +351,105 @@ public class InfluencerSurveyImpl implements InfluencerSurveyService {
 
 		return influencerSurveyMap;
 
+	}
+
+	@Override
+	public Map<Object, Object> getInfluencerSurveyRecordbyMail(String byEmail) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		List<InfluencerSurvey> influencerSurveyList = new ArrayList<InfluencerSurvey>();
+		if (byEmail != null)
+			influencerSurveyList = influencerSurveyRepository.findInfuencerSurveyRecordsbyMail(byEmail);
+
+		try {
+
+			if (influencerSurveyList != null) {
+				map.put(IConstant.RESPONSE, IConstant.SUCCESS);
+				map.put(IConstant.RESPONSE_LIST, influencerSurveyList);
+			} else {
+				map.put(IConstant.RESPONSE, IConstant.NOT_AUTHORIZED);
+				map.put(IConstant.MESSAGE, "No such record found for perticular " + byEmail);
+			}
+		} catch (Exception e) {
+			map.put(IConstant.RESPONSE, IConstant.NOT_AUTHORIZED);
+			map.put(IConstant.MESSAGE, IConstant.EMPTY_LIST_MESSAGE);
+		}
+
+		return map;
+
+	}
+
+	@Override
+	public Map<Object, Object> editInfluencerSurveyRecord(InfluencerSurvey influencerSurvey) {
+
+		Map<Object, Object> map = new HashMap<Object, Object>();
+
+		try {
+
+			InfluencerSurvey inflSurvey = new InfluencerSurvey();
+
+			if (influencerSurvey.getYourEmail() != null) {
+
+				inflSurvey = influencerSurveyRepository
+						.findInfuencerSurveyRecordbyMail(influencerSurvey.getYourEmail());
+			}
+
+			if (inflSurvey != null) {
+
+				inflSurvey.setBlogFollowers(influencerSurvey.getBlogFollowers());
+				inflSurvey.setCitiesYourFollowersLocated(influencerSurvey.getCitiesYourFollowersLocated());
+				inflSurvey.setCountriesYourFollowersLocated(influencerSurvey.getCountriesYourFollowersLocated());
+				inflSurvey.setFacebookFollowers(influencerSurvey.getFacebookFollowers());
+				inflSurvey.setInfl(influencerSurvey.getInfl());
+				inflSurvey.setInstagramFollowers(influencerSurvey.getInstagramFollowers());
+				inflSurvey.setInterestedInWorkingWithBrands(influencerSurvey.getInterestedInWorkingWithBrands());
+				inflSurvey.setNumberOfCatsWillingToFeature(influencerSurvey.getNumberOfCatsWillingToFeature());
+				inflSurvey.setNumberOfDogsWillingToFeature(influencerSurvey.getNumberOfDogsWillingToFeature());
+				inflSurvey.setNumberOfKids(influencerSurvey.getNumberOfKids());
+				inflSurvey.setNumberOfOtherAnimalsWillingToFeature(
+						influencerSurvey.getNumberOfOtherAnimalsWillingToFeature());
+				inflSurvey.setPercentageOfFemaleFollowers(influencerSurvey.getPercentageOfFemaleFollowers());
+				inflSurvey.setPercentageOfMaleFollowers(influencerSurvey.getPercentageOfMaleFollowers());
+				inflSurvey.setPercentageOfOtherFollowers(influencerSurvey.getPercentageOfOtherFollowers());
+				inflSurvey.setPlatformYouUse(influencerSurvey.getPlatformYouUse());
+				inflSurvey.setProvideShortBioForBrands(influencerSurvey.getProvideShortBioForBrands());
+				inflSurvey.setSignificantOtherWillingToFeature(influencerSurvey.getSignificantOtherWillingToFeature());
+				inflSurvey.setTheirAges(influencerSurvey.getTheirAges());
+				inflSurvey.setTopicYouPost(influencerSurvey.getTopicYouPost());
+				inflSurvey.setTwitterFollowers(influencerSurvey.getTwitterFollowers());
+				inflSurvey.setTypeOfFood(influencerSurvey.getTypeOfFood());
+				inflSurvey.setTypeOfRoom(influencerSurvey.getTypeOfRoom());
+				inflSurvey.setTypeOfTravel(influencerSurvey.getTypeOfTravel());
+				inflSurvey.setYouNeverWorkWithBrands(influencerSurvey.getYouNeverWorkWithBrands());
+				inflSurvey.setYourBirthYear(influencerSurvey.getYourBirthYear());
+				inflSurvey.setYourFavoriteBrandToWorkWithSoFor(influencerSurvey.getYourFavoriteBrandToWorkWithSoFor());
+				inflSurvey.setYourFollowersAgeBrackets(influencerSurvey.getYourFollowersAgeBrackets());
+				inflSurvey.setYourGender(influencerSurvey.getYourGender());
+				inflSurvey.setYourName(influencerSurvey.getYourName());
+				inflSurvey.setYourPhoneNumber(influencerSurvey.getYourPhoneNumber());
+				inflSurvey.setYoutubeFollowers(influencerSurvey.getYoutubeFollowers());
+				inflSurvey.setFacebookPriceRange(influencerSurvey.getFacebookPriceRange());
+				inflSurvey.setInstagramPriceRange(influencerSurvey.getInstagramPriceRange());
+				inflSurvey.setTwitterPriceRange(influencerSurvey.getTwitterPriceRange());
+				inflSurvey.setYoutubePriceRange(influencerSurvey.getYoutubePriceRange());
+				inflSurvey.setBlogPriceRange(influencerSurvey.getBlogPriceRange());
+				inflSurvey = influencerSurveyRepository.save(inflSurvey);
+				if (inflSurvey != null) {
+					map.put(IConstant.RESPONSE, IConstant.SUCCESS);
+					map.put(IConstant.RESPONSE_LIST, inflSurvey);
+				}
+
+			} else {
+				map.put(IConstant.RESPONSE, IConstant.NOT_AUTHORIZED);
+				map.put(IConstant.MESSAGE, "No such Record found by particular " + influencerSurvey.getYourEmail());
+
+			}
+
+		} catch (Exception e) {
+			map.put(IConstant.RESPONSE, IConstant.NOT_AUTHORIZED);
+			map.put(IConstant.MESSAGE, "Failed Edit ");
+			//e.printStackTrace();
+		}
+		return map;
 	}
 
 }

@@ -103,6 +103,9 @@ public class MessangingServiceImpl implements MessangingService {
 			Messaging messangingObj = messangingRepository.save(messagingForSender);
 			Messaging messangingObj1 = messangingRepository.save(messagingForReceiver);
 
+			System.out.println("messangingObj=" + messangingObj);
+			System.out.println("messangingObj1=" + messangingObj1);
+
 			map.put(IConstant.RESPONSE, IConstant.SUCCESS);
 			map.put(IConstant.MESSAGE, "Mail sent successfully...");
 			// map.put(IConstant.OBJECT, messangingObj);
@@ -131,7 +134,9 @@ public class MessangingServiceImpl implements MessangingService {
 				senderType = IConstant.influencer_survey;
 
 			List<Messaging> messangingListForMessageIdentifiers = new ArrayList<Messaging>();
-			messangingListForMessageIdentifiers = messangingRepository.findUserByMessageIdentifiers(messageIdentifiers);
+
+			messangingListForMessageIdentifiers = messangingRepository
+					.findUserByMessageIdentifiersAndSenderType(messageIdentifiers, senderType);
 
 			System.out.println("1 messangingListForMessageIdentifiers =" + messangingListForMessageIdentifiers);
 
@@ -140,14 +145,19 @@ public class MessangingServiceImpl implements MessangingService {
 
 			for (Messaging messaging : messangingListForMessageIdentifiers) {
 
-				if (!(messaging.getFrom().equals(messageIdentifiers) || messaging.getSenderType().equals(senderType)))
+				if (!(messaging.getFrom().equals(messageIdentifiers) && messaging.getSenderType().equals(senderType)))
 					emailForSender.put(messaging.getFrom(), messaging.getId());
 
 				if (!(messaging.getTo().equals(messageIdentifiers) && messaging.getSenderType().equals(senderType)))
 					emailForRecever.put(messaging.getTo(), messaging.getId());
 
-			}
+				if (messaging.getFrom().equals(messaging.getTo()) && messaging.getSenderType().equals(senderType)) {
+					emailForRecever.put(messaging.getTo(), messaging.getId());
 
+					System.out.println("  same data =");
+
+				}
+			}
 			System.out.println("2 emailForSender =" + emailForSender);
 			System.out.println("3 emailForRecever =" + emailForRecever);
 
@@ -163,11 +173,11 @@ public class MessangingServiceImpl implements MessangingService {
 				}
 			}
 
-			Map<String, Integer> OverallRecentRecords = new HashMap<String, Integer>();
-			List<String> emailForReceverKeys = new ArrayList<String>();
-
 			System.out.println("3 emailForSender =" + emailForSender);
 			System.out.println("4 emailForRecever =" + emailForRecever);
+
+			Map<String, Integer> OverallRecentRecords = new HashMap<String, Integer>();
+			List<String> emailForReceverKeys = new ArrayList<String>();
 
 			if (emailForSender.isEmpty() && !emailForRecever.isEmpty())
 				OverallRecentRecords = emailForRecever;
@@ -194,16 +204,22 @@ public class MessangingServiceImpl implements MessangingService {
 						}
 
 					}
-
+					
 				}
 			}
 
+			/**
+			 * Removing all entry base on email from sender And Recever because of we
+			 * already add into OverallRecentRecords after compaire.
+			 **/
 			for (String removedMapEntry : emailForReceverKeys) {
 
 				emailForSender.remove(removedMapEntry);
 				emailForRecever.remove(removedMapEntry);
 
 			}
+
+			/** Remaining Entries add into OverallRecentRecords. **/
 
 			if (!emailForRecever.isEmpty()) {
 
@@ -213,6 +229,7 @@ public class MessangingServiceImpl implements MessangingService {
 				}
 			}
 
+			/** Remaining Entries add into OverallRecentRecords. **/
 			if (!emailForSender.isEmpty()) {
 
 				for (Map.Entry<String, Integer> senderEntry : emailForSender.entrySet()) {
@@ -231,9 +248,17 @@ public class MessangingServiceImpl implements MessangingService {
 				Optional<Messaging> getMessageById = messangingRepository
 						.findById(OverallRecentRecordsEntry.getValue());
 
-				long unreadableMessageCount = messangingRepository
-						.unreadableMessageCount(OverallRecentRecordsEntry.getKey(), senderType, messageIdentifiers);
-
+				/*
+				 * long unreadableMessageCount = messangingRepository
+				 * .unreadableMessageCount(OverallRecentRecordsEntry.getKey(), senderType,
+				 * messageIdentifiers);
+				 */
+				long unreadableMessageCount = 0;
+				/*
+				 * long unreadableMessageCount =
+				 * messangingRepository.unreadableUserMessageCount(senderType,
+				 * messageIdentifiers, 0);
+				 */
 				System.out.println("unreadableMessageCount=" + unreadableMessageCount);
 				if (unreadableMessageCount > 0)
 					repsonseMessage.setUnreadMessagesCount(unreadableMessageCount);
@@ -253,6 +278,8 @@ public class MessangingServiceImpl implements MessangingService {
 
 			}
 
+			System.out.println("responseMessagingList=" + responseMessagingList);
+
 			if (!responseMessagingList.isEmpty()) {
 				map.put(IConstant.RESPONSE, IConstant.SUCCESS);
 				map.put(IConstant.MESSAGE, "Recent Messages Identifier for " + messageIdentifiers);
@@ -264,6 +291,7 @@ public class MessangingServiceImpl implements MessangingService {
 			map.put(IConstant.OBJECT, responseMessagingList);
 
 		} catch (Exception e) {
+			
 			map.put(IConstant.RESPONSE, IConstant.NOT_AUTHORIZED);
 			map.put(IConstant.MESSAGE, "No any Message exist for particular " + messageIdentifiers);
 			map.put("Total Numbers of Records Founds ", 0);

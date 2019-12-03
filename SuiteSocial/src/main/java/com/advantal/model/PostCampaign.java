@@ -4,12 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -21,12 +19,14 @@ public class PostCampaign {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="post_campaign_id")
 	private Long postcampaignId;
-
+    
+	@Lob
 	@Column(name="campaign_title")
     private String campaignTitle;
 	
 	@Column(name="sub_title")
     private String subTitle;
+	
 	
 	@Column(name="start_date")
     private Date startDate;
@@ -35,6 +35,7 @@ public class PostCampaign {
     private Date endDate;
 	
     //discription
+	@Lob
 	@Column(name="about_campaigning")
 	private String aboutCampaigning;
 	
@@ -47,10 +48,7 @@ public class PostCampaign {
 	@Column(name="is_active" ,columnDefinition="boolean default true")
 	private boolean isActive;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	//@JoinColumn(name = "organzation_email")
-//	private Organization org;
-//	
+	
     @NotNull
 	@Column(name="organzation_email")
 	private String organizationEmail;

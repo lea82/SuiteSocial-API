@@ -142,8 +142,30 @@ public class InfluencerSurveyVO {
 	@XmlElement(name = "search_By_City_Or_Name")
 	private String searchByCityOrName;
 
+	@XmlElement(name = "average_rating")
+	private Double averageRating;
+
+	@XmlElement(name = "total_rating")
+	private Integer totalRating;
+
 	public Long getInfluencersurveyId() {
 		return influencersurveyId;
+	}
+
+	public Double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(Double averageRating) {
+		this.averageRating = averageRating;
+	}
+
+	public Integer getTotalRating() {
+		return totalRating;
+	}
+
+	public void setTotalRating(Integer totalRating) {
+		this.totalRating = totalRating;
 	}
 
 	public void setInfluencersurveyId(Long influencersurveyId) {
@@ -416,25 +438,34 @@ public class InfluencerSurveyVO {
 
 	@Override
 	public String toString() {
+		final int maxLen = 10;
 		return "InfluencerSurveyVO [influencersurveyId=" + influencersurveyId + ", yourName=" + yourName
 				+ ", yourEmail=" + yourEmail + ", yourPhoneNumber=" + yourPhoneNumber + ", yourBirthYear="
 				+ yourBirthYear + ", yourGender=" + yourGender + ", platformYouUse=" + platformYouUse
-				+ ", topicYouPost=" + topicYouPost + ", countriesYourFollowersLocated=" + countriesYourFollowersLocated
-				+ ", citiesYourFollowersLocated=" + citiesYourFollowersLocated + ", yourFollowersAgeBrackets="
-				+ yourFollowersAgeBrackets + ", percentageOfMaleFollowers=" + percentageOfMaleFollowers
-				+ ", percentageOfFemaleFollowers=" + percentageOfFemaleFollowers + ", percentageOfOtherFollowers="
-				+ percentageOfOtherFollowers + ", numberOfKids=" + numberOfKids + ", theirAges=" + theirAges
-				+ ", numberOfDogsWillingToFeature=" + numberOfDogsWillingToFeature + ", numberOfCatsWillingToFeature="
-				+ numberOfCatsWillingToFeature + ", numberOfOtherAnimalsWillingToFeature="
-				+ numberOfOtherAnimalsWillingToFeature + ", significantOtherWillingToFeature="
-				+ significantOtherWillingToFeature + ", typeOfTravel=" + typeOfTravel + ", typeOfRoom=" + typeOfRoom
-				+ ", typeOfFood=" + typeOfFood + ", interestedInWorkingWithBrands=" + interestedInWorkingWithBrands
-				+ ", youNeverWorkWithBrands=" + youNeverWorkWithBrands + ", provideShortBioForBrands="
-				+ provideShortBioForBrands + ", yourFavoriteBrandToWorkWithSoFor=" + yourFavoriteBrandToWorkWithSoFor
-				+ ", facebookFollowers=" + facebookFollowers + ", instagramFollowers=" + instagramFollowers
-				+ ", twitterFollowers=" + twitterFollowers + ", youtubeFollowers=" + youtubeFollowers
-				+ ", blogFollowers=" + blogFollowers + ", infl=" + infl + ", searchByCityOrName=" + searchByCityOrName
-				+ "]";
+				+ ", topicYouPost="
+				+ (topicYouPost != null ? topicYouPost.subList(0, Math.min(topicYouPost.size(), maxLen)) : null)
+				+ ", countriesYourFollowersLocated=" + countriesYourFollowersLocated + ", citiesYourFollowersLocated="
+				+ (citiesYourFollowersLocated != null
+						? citiesYourFollowersLocated.subList(0, Math.min(citiesYourFollowersLocated.size(), maxLen))
+						: null)
+				+ ", yourFollowersAgeBrackets="
+				+ (yourFollowersAgeBrackets != null
+						? yourFollowersAgeBrackets.subList(0, Math.min(yourFollowersAgeBrackets.size(), maxLen))
+						: null)
+				+ ", percentageOfMaleFollowers=" + percentageOfMaleFollowers + ", percentageOfFemaleFollowers="
+				+ percentageOfFemaleFollowers + ", percentageOfOtherFollowers=" + percentageOfOtherFollowers
+				+ ", numberOfKids=" + numberOfKids + ", theirAges=" + theirAges + ", numberOfDogsWillingToFeature="
+				+ numberOfDogsWillingToFeature + ", numberOfCatsWillingToFeature=" + numberOfCatsWillingToFeature
+				+ ", numberOfOtherAnimalsWillingToFeature=" + numberOfOtherAnimalsWillingToFeature
+				+ ", significantOtherWillingToFeature=" + significantOtherWillingToFeature + ", typeOfTravel="
+				+ typeOfTravel + ", typeOfRoom=" + typeOfRoom + ", typeOfFood=" + typeOfFood
+				+ ", interestedInWorkingWithBrands=" + interestedInWorkingWithBrands + ", youNeverWorkWithBrands="
+				+ youNeverWorkWithBrands + ", provideShortBioForBrands=" + provideShortBioForBrands
+				+ ", yourFavoriteBrandToWorkWithSoFor=" + yourFavoriteBrandToWorkWithSoFor + ", facebookFollowers="
+				+ facebookFollowers + ", instagramFollowers=" + instagramFollowers + ", twitterFollowers="
+				+ twitterFollowers + ", youtubeFollowers=" + youtubeFollowers + ", blogFollowers=" + blogFollowers
+				+ ", infl=" + infl + ", searchByCityOrName=" + searchByCityOrName + ", averageRating=" + averageRating
+				+ ", totalRating=" + totalRating + "]";
 	}
 
 }

@@ -65,6 +65,12 @@ public interface InfluencerSurveyRepository extends JpaRepository<InfluencerSurv
 
 	@Query(value = " SELECT *FROM influencer_survey WHERE influencer_survey_id IN(:influencerSurveyIdList) ", nativeQuery = true)
 	List<InfluencerSurvey> byIdAllDatas(List<Object> influencerSurveyIdList);
+	
+	@Query(value = " FROM InfluencerSurvey WHERE yourEmail= :byEmail   ")
+	List<InfluencerSurvey> findInfuencerSurveyRecordsbyMail(String byEmail);
+
+	@Query(value = " SELECT *FROM influencer_survey WHERE your_email = :byEmail ", nativeQuery = true)
+	InfluencerSurvey findInfuencerSurveyRecordbyMail(String byEmail);
 
 
 }

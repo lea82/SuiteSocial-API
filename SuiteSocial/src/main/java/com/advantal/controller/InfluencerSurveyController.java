@@ -41,4 +41,18 @@ public class InfluencerSurveyController {
 		return inflSurveyService.searchByInfluencerSurveyCriteria(InfluencerSurveyVO);
 
 	}
+	
+	@PostMapping(value = "/get_influencer_survey_by_email")
+	public Map<Object, Object> findInfluencerSurveyByEmail(@RequestBody Map<String, String> reqParams) {		
+		
+		return inflSurveyService.getInfluencerSurveyRecordbyMail(reqParams.get("yourEmail"));	
+	}
+	
+	
+	@PostMapping(value = "/edit_influencer_survey")
+	public Map<Object, Object> editInfluencerSurveyByEmail(@RequestBody InfluencerSurvey influencerSurvey) {		
+		
+		return inflSurveyService.editInfluencerSurveyRecord(influencerSurvey);	
+	}
+
 }

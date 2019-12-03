@@ -1,7 +1,9 @@
 package com.adantal.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.advantal.model.InflPayload;
 import com.advantal.model.Influencer;
+import com.advantal.model.InfluencerSurvey;
 import com.advantal.model.OrgPayload;
 import com.advantal.model.Organization;
+import com.advantal.model.PostCampaign;
 import com.advantal.repository.InfluencerRepository;
 import com.advantal.service.InfluencerService;
 import com.advantal.util.AESCipher;
@@ -107,7 +111,7 @@ System.err.println(influencer.getPassword());
 		
 		return true;
 	} catch (Exception e) {
-		e.printStackTrace();
+		//e.printStackTrace();
 		return false;
 	}
 	}
@@ -184,7 +188,7 @@ System.err.println(influencer.getPassword());
 			influencerRepository.save(influencer);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		}
 	}
@@ -200,7 +204,7 @@ System.err.println(influencer.getPassword());
 			}
 			
 		 } catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return influencer;
 		}
 		
@@ -220,6 +224,8 @@ System.err.println(influencer.getPassword());
 			inflList.add(inflPayload);
 		}
 		return inflList;
-	}	
+	}
+
+	
 	
 }
