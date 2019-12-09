@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+  suitesocialapi:
+    container_name: suitesocialapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    env_file: .env.api
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
