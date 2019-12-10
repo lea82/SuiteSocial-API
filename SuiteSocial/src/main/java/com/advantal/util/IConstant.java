@@ -11,7 +11,7 @@ public class IConstant {
 
 	public static final String IMG = "https://shieldcrypt.com:7384/SuiteSocial_Img/";
 
-	//public static final String POSTCAMPAIGN_FILE_PATH="/home/apache9/webapps/SuiteSocial_Img/";
+    //public static final String POSTCAMPAIGN_FILE_PATH="/home/apache9/webapps/SuiteSocial_Img/";
 	public static final String POSTCAMPAIGN_FILE_PATH = "F://picSocialSuite//";
 	public static final String SUCCESS = "200";
 	public static final String ORGANIZAION_CREATED_SUCCESS_MESSAGE = "Organization Created successfully";

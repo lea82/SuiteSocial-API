@@ -42,7 +42,6 @@ public class UserLoginController {
 					if (orgLogin.getIsVerified() == 0) {
 						
 						String emailOtp=RandomStringGenerator.getRandomNumberString(4);
-						//System.out.println(emailOtp);
 						orgLogin.setEmailOtp(emailOtp);
 				        Organization org=organizationRepository.save(orgLogin);
 						String data = EmailTemplate.getMailBodyTemplate2(org.getEmailOtp());
