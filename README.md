@@ -18,8 +18,14 @@ $ vi .env.api
 $ docker-compose up -d suitesocialapi
 ```
 
-- See the logs
+- See the logs to follow up the deployment process
 
 ```
 $ docker logs -f --tail 30 suitesocialapi
+```
+
+- For code updating in the server, you will need stop the docker instance and get up it again using the following commands once you have the directory updated
+```
+$ docker-compose rm -sf suitesocialapi
+$ docker-compose up -d suitesocialapi
 ```
