@@ -12,7 +12,7 @@ $ cd SuiteSocial
 $ vi .env.api
 ``` 
 
-- Run the `docker-compose` command to deploy the application
+- Run the `docker-compose` command to deploy the application (at once)
 
 ```
 $ docker-compose up -d suitesocialapi
@@ -26,6 +26,7 @@ $ docker logs -f --tail 30 suitesocialapi
 
 - For code updating in the server, you will need stop the docker instance and get up it again using the following commands once you have the directory updated
 ```
+$ docker-compose build --no-cache suitesocialapi
 $ docker-compose rm -sf suitesocialapi
 $ docker-compose up -d suitesocialapi
 ```
